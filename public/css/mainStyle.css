@@ -1,0 +1,98 @@
+
+.bg-navbar {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 10%, rgba(83,132,205,1) 40%,  rgba(2,0,36,1) 90%);
+}
+.navbar img {
+    width: 40px;
+}
+.pagesNavigator {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.pagesNavigator > * {
+    margin-inline: 1vw;
+    margin-bottom: 5px;
+}
+
+.mainGallery {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-start;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.mainGallery > div{
+    width: 19%;
+    margin: 10px;
+}
+
+.mainGallery img{
+    width: 100%;
+    object-fit: contain;
+}
+
+.sideBar {
+    background-color: #031633;
+
+    min-height: 85vh;
+}
+
+@media screen and (max-width: 1650px){
+    .mainGallery > div {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 999px){
+    .mainGallery > div {
+        width: 45%;
+    }
+    .sideBar {
+        min-height: auto;
+    }
+}
+.zoznamTags {
+    list-style-type: none;
+    text-align: center;
+
+}
+.zoznamTags .tagInfo {
+    color: #0dcaf0;
+}
+.zoznamTags a {
+    color: white;
+    font-size: large;
+    text-decoration: none;
+    text-align: center;
+    height: 100%;
+}
+.zoznamTags i {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.tagRow {
+    display: flex;
+    align-items: center;
+}
+.tagDisabled {
+    color: #6c757d;
+}
+
+.green {
+    color: lawngreen;
+}
+
+.red {
+    color: red;
+}
+.wighterBackground {
+    background-color: #ffffff10;
+    border-radius: 5px;
+}
+

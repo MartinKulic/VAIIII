@@ -3,6 +3,8 @@
 /** @var Array $data */
 
 /** @var \App\Core\LinkGenerator $link */
+
+$layout = 'framework';
 ?>
 
 <div class="row">

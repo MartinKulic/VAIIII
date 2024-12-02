@@ -1,31 +1,137 @@
-<div class="container-fluid">
+<?php
+
+?>
+
+<div class = container-fluid>
     <div class="row">
-        <div class="col mt-5">
-            <div class="text-center">
-                <h2>Vaííčko MVC FW</h2>
-                <img src="public/images/vaiicko_logo.png">
-                <p>
-                    Gratulujeme vám, úspešne sa vám podarilo nainštalovať a spustiť framework
-                    <strong>Vaííčko</strong> <?= \App\Config\Configuration::FW_VERSION ?>!<br>
-                    Dúfame, že sa Vám pomocou tohto frameworku vytvoríte nejakú skvelú aplikáciu.<br>
-                </p>
-                <p>
-                    Tento jednoduchý framework bol vytvorený pre lepšie pochopenie architektúry MVC.<br>
-                    Je určený pre študentov predmetu <em>vývoj aplikácií pre internet a intranet</em>, ale nielen im.
-                </p>
+    <span class="pagesNavigator">
+        <a href="#"><<</a>
+        <a href="#"><</a>
+        <a href="#" class="tagDisabled">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a>...</a>
+        <a href="#">1654</a>
+        <a href="#">></a>
+        <a href="#">>></a>
+      </span>
+        <!-- Side pannel -->
+        <aside class="col-xl-2 col-lg-3 order-lg-1 order-3 p-2 sideBar">
+            <div class="input-group mb-2 align-self-center">
+          <span class="input-group-text">
+            <i class = "bi-search"></i>
+          </span>
+                <textarea class="form-control" aria-label="With textarea">Pes Mačka Sample Unfunny</textarea>
             </div>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col text-center">
-            <h4>Autori</h4>
-            <div>
-                <a href="mailto:Patrik.Hrkut@fri.uniza.sk">doc. Ing. Patrik Hrkút, PhD.</a><br>
-                <a href="mailto:Michal.Duracik@fri.uniza.sk">Ing. Michal Ďuračík, PhD.</a><br>
-                <a href="mailto:Matej.Mesko@fri.uniza.sk">Ing. Matej Meško, PhD.</a><br><br>
-                &copy; 2020-<?= date('Y') ?> Žilinská univerzita v Žiline, Fakulta riadenia a informatiky, Katedra
-                softvérových technológií
+            <!-- Aktivne vo filtry -->
+            <div class="row">
+                <h3 class="col align-items-start">Aktývny Filter</h3>
+                <button class="col-4 me-3 btn-danger align-items-end">Zruš filter</button>
             </div>
-        </div>
+
+            <ul class="mt-2 p-2 zoznamTags container-fluid justify-content-center">
+                <li class="tagRow mt-1 p-1 wighterBackground">
+                    <a href="#" class="me-2 tagInfo"><i class="bi-info-square"></i></a>
+                    <a href="#"><i class="bi-clipboard-plus tagDisabled"></i></a>
+                    <a href="#"><i class="bi-clipboard-minus red"></i></a>
+                    <a href="#" class="ms-2">Pes</a>
+                </li>
+                <li class="tagRow mt-1 p-1 wighterBackground">
+                    <a href="#" class="me-2 tagInfo"><i class="bi-info-square"></i></a>
+                    <a href="#"><i class="bi-clipboard-plus tagDisabled"></i></a>
+                    <a href="#"><i class="bi-clipboard-minus red"></i></a>
+                    <a href="#" class="ms-2">Mačka</a>
+                </li>
+                <li class="tagRow mt-1 p-1 wighterBackground">
+                    <a href="#" class="me-2 tagInfo"><i class="bi-info-square"></i></a>
+                    <a href="#"><i class="bi-clipboard-plus tagDisabled"></i></a>
+                    <a href="#"><i class="bi-clipboard-minus red"></i></a>
+                    <a href="#" class="ms-2">Sample</a>
+                </li>
+                <li class="tagRow mt-1 p-1 wighterBackground">
+                    <a href="#" class="me-2 tagInfo"><i class="bi-info-square"></i></a>
+                    <a href="#"><i class="bi-clipboard-plus tagDisabled"></i></a>
+                    <a href="#"><i class="bi-clipboard-minus red"></i></a>
+                    <a href="#" class="ms-2">Unfunny</a>
+                </li>
+            </ul>
+            <!-- Tiez sa vyskytujuce Tagy -->
+            <hr class="hr">
+            <h3>Tiež sa vyskytujúce</h3>
+            <ul class="mt-2 p-2 zoznamTags wighterBackground justify-content-center">
+                <li class="tagRow mb-1">
+                    <a href="#" class="me-2 tagInfo"><i class="bi-info-square"></i></a>
+                    <a href="#"><i class="bi-clipboard-plus green"></i></a>
+                    <a href="#"><i class="bi-clipboard-minus red"></i></a>
+                    <a href="#" class="ms-2">Žmurkanie</a>
+                </li>
+                <li class="tagRow mb-1">
+                    <a href="#" class="me-2 tagInfo"><i class="bi-info-square"></i></a>
+                    <a href="#"><i class="bi-clipboard-plus green"></i></a>
+                    <a href="#"><i class="bi-clipboard-minus red"></i></a>
+                    <a href="#" class="ms-2">Ospalosť</a>
+                </li>
+                <li class="tagRow mb-1">
+                    <a href="#" class="me-2 tagInfo"><i class="bi-info-square"></i></a>
+                    <a href="#"><i class="bi-clipboard-plus green"></i></a>
+                    <a href="#"><i class="bi-clipboard-minus red"></i></a>
+                    <a href="#" class="ms-2">Smutlý</a>
+                </li>
+                <li class="tagRow mb-1">
+                    <a href="#" class="me-2 tagInfo"><i class="bi-info-square"></i></a>
+                    <a href="#"><i class="bi-clipboard-plus green"></i></a>
+                    <a href="#"><i class="bi-clipboard-minus red"></i></a>
+                    <a href="#" class="ms-2">Štastný</a>
+                </li>
+                <li class="tagRow mb-1">
+                    <a href="#" class="me-2 tagInfo"><i class="bi-info-square"></i></a>
+                    <a href="#"><i class="bi-clipboard-plus green"></i></a>
+                    <a href="#"><i class="bi-clipboard-minus red"></i></a>
+                    <a href="#" class="ms-2">Podozieravy</a>
+                </li>
+
+            </ul>
+        </aside>
+
+
+        <main class="col-xl-10 col-lg-9 col-12 order-lg-2 order-1">
+            <hr class="hr">
+            <div class="mainGallery m-lg-3 m-sm-0">
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/balltze-dog-aka-cheems.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/Original_Doge_meme.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/imagescat.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/balltze-dog-aka-cheems.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/maxresdefault.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/imagescat.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/maxresdefault.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/Original_Doge_meme.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/balltze-dog-aka-cheems.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/imagescat.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/balltze-dog-aka-cheems.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/maxresdefault.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/balltze-dog-aka-cheems.jpg"></a></div>
+                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/Original_Doge_meme.jpg"></a></div>
+            </div>
+
+        </main>
+
+        <span class="pagesNavigator container-fluid order-2">
+        <a href="#"><<</a>
+        <a href="#"><</a>
+        <a href="#" class="tagDisabled">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a>...</a>
+        <a href="#">1654</a>
+        <a href="#">></a>
+        <a href="#">>></a>
+      </span>
     </div>
 </div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
