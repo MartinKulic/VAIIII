@@ -83,7 +83,9 @@
 .tagDisabled {
     color: #6c757d;
 }
-
+.scoreRow {
+    display: inline-flex;
+}
 .green {
     color: lawngreen;
 }

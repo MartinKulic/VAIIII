@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="/public/css/mainStyle.css">
     <script src="public/js/script.js"></script>
 </head>
-<body>
+<body  class="bg-body" data-bs-theme="dark">
 <header>
     <nav class="navbar navbar-expand-lg bg-navbar">
         <div class="container">
@@ -35,9 +35,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <?php if ($auth->isLogged()) { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Nahrať</a>
+                        <a class="btn btn btn-outline-info" href="#"><i class="bi bi-arrow-bar-up"></i> Nahrať</a>
                     </li>
+                    <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Nedávne</a>
                     </li>
@@ -55,8 +57,12 @@
                 </ul>
 
                 <span class="d-flex">
-            <a href="LogIn/logOn.html" class="btn btn-outline-primary me-3">Log in</a>
-            <a href="LogIn/logOn.html" class="btn btn-primary">Sign in</a>
+                    <?php if ($auth->isLogged()) { ?>
+                        <a href="<?= $link->url("auth.logout") ?>" class="btn btn-outline-light me-3">Log off</a>
+                    <?php } else { ?>
+                        <a href="<?= \App\Config\Configuration::LOGIN_URL ?>" class="btn btn-outline-primary me-3">Log in</a>
+                        <a href="<?= \App\Config\Configuration::LOGIN_URL ?>" class="btn btn-primary">Sign in</a>
+                    <?php } ?>
           </span>
             </div>
         </div>

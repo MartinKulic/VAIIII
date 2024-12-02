@@ -1,5 +1,13 @@
 <?php
+/** @var Array $data */
+/** @var \App\Models\Post $post */
+/** @var \App\Core\IAuthenticator $auth */
 
+/** @var \App\Core\LinkGenerator $link */
+
+use App\Models\Image;
+
+$images = $data["images"];
 ?>
 
 <div class = container-fluid>
@@ -93,24 +101,21 @@
             </ul>
         </aside>
 
-
+        <!-- Galeria obrazkov -->
         <main class="col-xl-10 col-lg-9 col-12 order-lg-2 order-1">
             <hr class="hr">
             <div class="mainGallery m-lg-3 m-sm-0">
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/balltze-dog-aka-cheems.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/Original_Doge_meme.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/imagescat.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/balltze-dog-aka-cheems.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/maxresdefault.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/imagescat.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/maxresdefault.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/Original_Doge_meme.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/balltze-dog-aka-cheems.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/imagescat.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/balltze-dog-aka-cheems.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/maxresdefault.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/balltze-dog-aka-cheems.jpg"></a></div>
-                <div><a href="ImgDetail/imgDetail.html"><img src="public/images/sample/Original_Doge_meme.jpg"></a></div>
+                <?php foreach ($images as $image) { ?>
+                    <div class="container">
+                        <div class="d-fled flex-column">
+                            <a href=""><img src="<?=$image->getPath()?>"></a>
+                            <div class="scoreRow">
+                                <span class="green">124 <i class="bi bi-caret-up"></i></span >
+                                <span class="red"><i class="bi bi-caret-down"></i> 69</span >
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
 
         </main>
