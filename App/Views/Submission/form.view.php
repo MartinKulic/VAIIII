@@ -3,8 +3,10 @@
 /** @var Array $data */
 ?>
 <!-- Bootstrap Autocomplete Plugin -->
-<script src="/path/to/dist/js/bootstrap-autocomplete.js"></script>
-<form method="post" action="<?= $link->url('post.save') ?>" enctype="multipart/form-data">
+
+<form method="post" action="<?= $link->url('submission.save') ?>" enctype="multipart/form-data">
+
+    <input <input type="hidden" name="sub_id" value="<?= @$data['submission']?->getId() ?>">
 
     <label for="imageInput">Image:</label>
     <div class="form-group">

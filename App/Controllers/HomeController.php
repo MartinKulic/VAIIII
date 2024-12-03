@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Core\AControllerBase;
+use App\Core\HTTPException;
 use App\Core\Responses\Response;
+use App\Helpers\Submission;
 use App\Models\Image;
 
 class HomeController extends AControllerBase
@@ -16,6 +18,18 @@ class HomeController extends AControllerBase
     {
         return $this->html([
             "images" => Image::getAll()
+        ]);
+    }
+
+    public function detail(): Response{
+        $subID = (int) $this->request()->getValue("subId");
+        $submission = new Submission($subID);
+
+        if(is_null($submission)){
+            throw new HTTPException(405, "Submission not found");
+        }
+        return $this->html([
+            "submission" => $submission
         ]);
     }
 }
