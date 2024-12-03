@@ -37,7 +37,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <?php if ($auth->isLogged()) { ?>
                     <li class="nav-item">
-                        <a class="btn btn btn-outline-info" href="#"><i class="bi bi-arrow-bar-up"></i> Nahrať</a>
+                        <a class="btn btn btn-outline-info" href="<?= $link->url("submission.add") ?>"><i class="bi bi-arrow-bar-up"></i> Nahrať</a>
                     </li>
                     <?php } ?>
                     <li class="nav-item">

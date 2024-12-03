@@ -20,6 +20,6 @@ class SubmissionController extends AControllerBase
     }
     public function add(): Response
     {
-        // TODO: Implement index() method.
+        return $this->html();
     }
 }
