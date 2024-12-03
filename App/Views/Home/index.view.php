@@ -10,8 +10,18 @@ use App\Models\Image;
 $images = $data["images"];
 ?>
 
+
 <div class = container-fluid>
     <div class="row">
+
+        <?php if (!is_null(@$data['messages'])): ?>
+            <?php foreach ($data['messages'] as $msg): ?>
+                <div class="alert alert-primary" role="alert" role="alert">
+                    <?= $msg ?>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
     <span class="pagesNavigator">
         <a href="#"><<</a>
         <a href="#"><</a>

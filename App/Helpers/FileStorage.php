@@ -36,6 +36,6 @@ class FileStorage
      */
     public static function deleteFile(string $filename)
     {
-        unlink(FileStorage::UPLOAD_DIR . DIRECTORY_SEPARATOR . $filename);
+        unlink($filename);
     }
 }

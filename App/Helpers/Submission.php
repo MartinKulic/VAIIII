@@ -10,7 +10,7 @@ class Submission
     protected $image;
     protected $autorName;
     protected $autorId;
-    protected $image_tags;
+    protected $image_tags = [];
 
     function __construct($image_id){
         $this->image = Image::getOne($image_id);
@@ -22,6 +22,16 @@ class Submission
         $this->autorId = $autor?->getId() ?? 0;
 
         return $this;
+    }
+
+    public function delete(){
+        //TODO: delete image_tags
+
+        FileStorage::deleteFile($this->image->getPath());
+        $this->image->delete();
+    }
+    public function getImageId(){
+        return $this->image->getId();
     }
 
     public function getAutorId(): int
@@ -53,6 +63,17 @@ class Submission
     {
         $this->image = $image;
     }
+
+    public function getImageTags(): array
+    {
+        return $this->image_tags;
+    }
+
+    public function setImageTags(array $image_tags): void
+    {
+        $this->image_tags = $image_tags;
+    }
+
 
 
 
