@@ -3,8 +3,10 @@
 namespace App\Controllers;
 
 use App\Core\AControllerBase;
+use App\Core\HTTPException;
 use App\Core\Responses\Response;
 use App\Helpers\FileStorage;
+use App\Helpers\Submission;
 use App\Models\Image;
 
 /**
@@ -50,5 +52,15 @@ class SubmissionController extends AControllerBase
         $image->save();
 
         return $this->redirect($this->url("home.index"));
+    }
+
+    public function edit(): Response{
+        $id = (int) $this->request()->getValue("imgID");
+        $submission = new Submission($id);
+
+        if (is_null($submission)) {
+            throw new HTTPException(405,"Submission not found");
+        }
+        return $this->html(["submission"=>$submission]);
     }
 }

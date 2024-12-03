@@ -32,7 +32,7 @@ class TestAuthenticator extends DummyAuthenticator
 
     public function getLoggedUserId(): mixed
     {
-        return isset($_SESSION['user']) ? $_SESSION['user']["id"] : throw new \Exception("User not logged in");
+        return isset($_SESSION['user']) ? $_SESSION['user']["id"] : null;
     }
 
 

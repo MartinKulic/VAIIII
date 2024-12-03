@@ -27,7 +27,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-navbar">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="<?=$link->url("home.index")?>">
                 <img src="public/images/Logo.png" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,10 +58,10 @@
 
                 <span class="d-flex">
                     <?php if ($auth->isLogged()) { ?>
-                        <a href="<?= $link->url("auth.logout") ?>" class="btn btn-outline-light me-3">Log off</a>
+                        <a href="<?= $link->url("auth.logout") ?>" class="btn btn-outline-light me-3">Log out</a>
                     <?php } else { ?>
                         <a href="<?= \App\Config\Configuration::LOGIN_URL ?>" class="btn btn-outline-primary me-3">Log in</a>
-                        <a href="<?= \App\Config\Configuration::LOGIN_URL ?>" class="btn btn-primary">Sign in</a>
+                        <a href="<?= \App\Config\Configuration::LOGIN_URL ?>" class="btn btn-primary">Register</a>
                     <?php } ?>
           </span>
             </div>
