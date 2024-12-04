@@ -45,8 +45,9 @@ $images = $data["images"];
                         <div class="d-fled flex-column">
                             <a href="<?= $link->url("home.detail", ["subId" => $image->getId()]) ?>"><img src="<?=$image->getPath()?>"></a>
                             <div class="scoreRow">
-                                <span class="green">124 <i class="bi bi-caret-up"></i></span >
-                                <span class="red"><i class="bi bi-caret-down"></i> 69</span >
+                                <span class="green"> <i class="bi bi-caret-up"></i></span >
+                                <spam class="score_number"><?= \App\Models\Rating::getRatingFor($image->getId()) ?></spam>
+                                <span class="red"><i class="bi bi-caret-down"></i></span >
                             </div>
                         </div>
                     </div>
@@ -74,5 +75,15 @@ $images = $data["images"];
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+<script>
+    let imagesScoreVals = document.getElementsByClassName("score_number")
+    for (let score of imagesScoreVals){
+        if (parseInt(score.textContent) < 0) {
+            score.classList.add("red")
+        }
+        else if (parseInt(score.textContent) > 0){
+            score.classList.add("green")
+        }
+    }
+</script>
 

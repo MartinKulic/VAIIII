@@ -25,6 +25,7 @@ $submission = $data["submission"];
                 <div class="flex-row mt-3 d-flex justify-content-between">
                     <div class="col">
                         <button class="btn btn-outline-success"><i class="bi-hand-thumbs-up-fill fs-3 green"></i></button>
+                        <span class="mx-2">123</span>
                         <button class="btn btn-outline-danger mx-2"><i class="bi-hand-thumbs-down fs-3 red"></i></button>
                         <button class="btn btn-outline-warning"><i class="bi-star-fill fs-3"></i></button>
                     </div>

@@ -16,8 +16,10 @@ class HomeController extends AControllerBase
      */
     public function index(): Response
     {
+        $messages = $this->request()->getValue("messages");
         return $this->html([
-            "images" => Image::getAll()
+            "images" => Image::getAll(),
+            "messages" => $messages
         ]);
     }
 

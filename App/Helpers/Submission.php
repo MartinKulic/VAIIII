@@ -4,9 +4,11 @@ namespace App\Helpers;
 
 use App\Models\Image;
 use App\Models\User;
+use App\Models\Rating;
 
 class Submission
 {
+    protected $imageId;
     protected $image;
     protected $autorName;
     protected $autorId;
@@ -21,11 +23,18 @@ class Submission
         $this->autorName = $autor?->getName() ?? "unknown";
         $this->autorId = $autor?->getId() ?? 0;
 
+        $this->imageId=$this->image->getId();
+
         return $this;
     }
 
+    public function getScore()
+    {
+        return Rating::getRatingFor($this->imageId);
+    }
     public function delete(){
         //TODO: delete image_tags
+        //TODO: delete ratings
 
         FileStorage::deleteFile($this->image->getPath());
         $this->image->delete();
