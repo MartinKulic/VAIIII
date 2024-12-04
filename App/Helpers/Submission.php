@@ -13,8 +13,9 @@ class Submission
     protected $autorName;
     protected $autorId;
     protected $image_tags = [];
+    protected $fullRating; // poc hodnoteni pozitivne nedativne, hodnotenie prihlaseneho uzivatela
 
-    function __construct($image_id){
+    function __construct($image_id, $user_id){
         $this->image = Image::getOne($image_id);
         if (is_null($this->image) ){
             return null;
@@ -25,16 +26,30 @@ class Submission
 
         $this->imageId=$this->image->getId();
 
+        $this->fullRating = new RatingForImgInfo($this->image->getId(), $user_id);
         return $this;
+    }
+
+
+    public function getRatingInfo(){
+        return $this->fullRating;
+    }
+    public function getRatings(){
+        return $this->image->getRatings();
     }
 
     public function getScore()
     {
-        return Rating::getRatingFor($this->imageId);
+        return Rating::getRatingValueFor($this->imageId);
     }
     public function delete(){
         //TODO: delete image_tags
-        //TODO: delete ratings
+
+        $ratings = $this->image->getRatings();
+
+        foreach ($ratings as $rating){
+            $rating->delete();
+        }
 
         FileStorage::deleteFile($this->image->getPath());
         $this->image->delete();

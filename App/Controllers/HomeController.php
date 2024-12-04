@@ -25,7 +25,7 @@ class HomeController extends AControllerBase
 
     public function detail(): Response{
         $subID = (int) $this->request()->getValue("subId");
-        $submission = new Submission($subID);
+        $submission = new Submission($subID,$this->app->getAuth()->getLoggedUserId());
 
         if(is_null($submission)){
             throw new HTTPException(405, "Submission not found");

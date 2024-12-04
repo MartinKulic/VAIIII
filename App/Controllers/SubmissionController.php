@@ -8,6 +8,8 @@ use App\Core\Responses\Response;
 use App\Helpers\FileStorage;
 use App\Helpers\Submission;
 use App\Models\Image;
+use App\Core\Responses\JsonResponse;
+use http\Message;
 
 /**
  * @inheritDoc
@@ -19,7 +21,7 @@ class SubmissionController extends AControllerBase
     public function authorize(string $action)
     {
         $imgID = (int) $this->request()->getValue("imgID");
-        $this->currentSubmission = new Submission($imgID);
+        $this->currentSubmission = new Submission($imgID, $this->app->getAuth()->getLoggedUserId());
 
         if ($this->app->getAuth()->isLogged()){
             switch ($action) {
@@ -105,10 +107,23 @@ class SubmissionController extends AControllerBase
     }
 
     public function rate(): Response{
-        $data = $this->request()->getRawBodyJSON();
 
-        if( is_object($data) && property_exists($data, "messaage") && is_n  ){
+        if(is_null($this->currentSubmission)){
+            throw new HTTPException(405,"Submission not found");
+        }
 
+        $requestData = $this->request()->getRawBodyJSON();
+
+        if (is_object($requestData) && property_exists($requestData, 'voted') && !empty($requestData->voted))
+        {
+            $ratingInfo = $this->currentSubmission->getRatingInfo();
+
+            // Not implemented yet. for now just sent back what you recieve
+
+            return $this->json($ratingInfo);
+        }
+        else{
+            throw new HTTPException(405,"Invalid request body");
         }
     }
 }

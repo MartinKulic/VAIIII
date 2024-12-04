@@ -9,6 +9,7 @@ use App\Helpers\Submission;
 use App\Models\Image;
 
 $submission = $data["submission"];
+$rating = $submission->getRatingInfo();
 ?>
 <div class = container-fluid>
     <div class="row">
@@ -24,9 +25,11 @@ $submission = $data["submission"];
                 </div>
                 <div class="flex-row mt-3 d-flex justify-content-between">
                     <div class="col">
-                        <button class="btn btn-outline-success"><i class="bi-hand-thumbs-up-fill fs-3 green"></i></button>
-                        <span id="scoreVal" class="mx-2 h4 align-middle"><?= $submission->getScore() ?></span>
-                        <button class="btn btn-outline-danger"><i class="bi-hand-thumbs-down fs-3 red"></i></button>
+                        <span id="voteUpCount" class="green"><?= $rating->getUp() ?></span>
+                        <button id="voteUp" class=" btn btn-<?php if (!($rating->getCurUserVote() > 0) ){ ?><?="outline-"?><?php } ?>success "><i class="bi bi-hand-thumbs-up fs-3"></i></i></button>
+                        <span id="scoreVal" class="mx-2 h4 align-middle"><?= $rating->getScore() ?></span>
+                        <button id ="voteDown" class="btn btn-<?php if (!($rating->getCurUserVote() < 0) ){ echo "outline-"; } ?>danger "><i class="bi-hand-thumbs-down fs-3"></i></button>
+                        <span id="voteDownCount" class="red"><?= $rating->getDown() ?></span>
                         <button class="btn btn-outline-warning mx-lg-5 mx-1"><i class="bi-star-fill fs-3"></i></button>
                     </div>
                     <!-- Edit button only if you are author -->
@@ -58,7 +61,9 @@ $submission = $data["submission"];
     </div>
 </div>
 <script src="/public/js/numberColour.js"></script>
+<script src="/public/js/rating.js"></script>
 <script>
     let scoreVal = document.getElementById("scoreVal")
     colour(scoreVal)
+    let rat = new Rating()
 </script>

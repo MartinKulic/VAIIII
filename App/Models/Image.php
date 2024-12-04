@@ -12,6 +12,10 @@ class Image extends Model
     protected string $desc = "";
     protected int $autor_id;
 
+    public function getRatings(){
+        return Rating::getAll("`image_id` = ?",[$this->id]);
+    }
+
     public function getId(): int
     {
         return $this->id;

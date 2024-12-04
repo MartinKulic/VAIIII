@@ -12,7 +12,7 @@ class Rating extends Model
     protected int $value;
 
 
-    public static function getRatingFor($imgId){
+    public static function getRatingValueFor($imgId){
         $image_ratings = Rating::getAll("`image_id` = ?",[$imgId]);
         $rating = 0;
 

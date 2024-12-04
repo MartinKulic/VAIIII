@@ -46,7 +46,7 @@ $images = $data["images"];
                             <a href="<?= $link->url("home.detail", ["subId" => $image->getId()]) ?>"><img src="<?=$image->getPath()?>"></a>
                             <div class="scoreRow">
                                 <span class="green"> <i class="bi bi-caret-up"></i></span >
-                                <spam class="score_number"><?= \App\Models\Rating::getRatingFor($image->getId()) ?></spam>
+                                <spam class="score_number"><?= \App\Models\Rating::getRatingValueFor($image->getId()) ?></spam>
                                 <span class="red"><i class="bi bi-caret-down"></i></span >
                             </div>
                         </div>
