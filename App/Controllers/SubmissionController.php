@@ -103,4 +103,12 @@ class SubmissionController extends AControllerBase
             "messages"=>["Submission deleted successfully"]
         ]));
     }
+
+    public function rate(): Response{
+        $data = $this->request()->getRawBodyJSON();
+
+        if( is_object($data) && property_exists($data, "messaage") && is_n  ){
+
+        }
+    }
 }

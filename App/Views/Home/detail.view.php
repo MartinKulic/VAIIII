@@ -25,14 +25,15 @@ $submission = $data["submission"];
                 <div class="flex-row mt-3 d-flex justify-content-between">
                     <div class="col">
                         <button class="btn btn-outline-success"><i class="bi-hand-thumbs-up-fill fs-3 green"></i></button>
-                        <span class="mx-2">123</span>
-                        <button class="btn btn-outline-danger mx-2"><i class="bi-hand-thumbs-down fs-3 red"></i></button>
-                        <button class="btn btn-outline-warning"><i class="bi-star-fill fs-3"></i></button>
+                        <span id="scoreVal" class="mx-2 h4 align-middle"><?= $submission->getScore() ?></span>
+                        <button class="btn btn-outline-danger"><i class="bi-hand-thumbs-down fs-3 red"></i></button>
+                        <button class="btn btn-outline-warning mx-lg-5 mx-1"><i class="bi-star-fill fs-3"></i></button>
                     </div>
                     <!-- Edit button only if you are author -->
                     <?php if ($auth->isLogged() && $submission->getAutorID()==$auth->getLoggedUserId()) : ?>
                     <div class="d-flex align-items-stretch">
-                        <a href="<?=$link->url("submission.edit", ["imgID"=>$submission->getImage()->getId()])?>" class="btn btn-primary"><i class="bi bi-pencil"></i> Edit</a>
+                        <a href="<?=$link->url("submission.edit", ["imgID"=>$submission->getImage()->getId()])?>" class="btn btn-primary d-flex align-items-center">
+                            <span class="h5"> <i class="bi bi-pencil"></i> Edit </span></a>
                     </div>
                     <?php endif; ?>
                 </div>
@@ -56,3 +57,8 @@ $submission = $data["submission"];
 
     </div>
 </div>
+<script src="/public/js/numberColour.js"></script>
+<script>
+    let scoreVal = document.getElementById("scoreVal")
+    colour(scoreVal)
+</script>
