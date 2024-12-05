@@ -1,6 +1,7 @@
 ﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
+-- rating should have imageId + userId as primary key
 
 CREATE TABLE `images` (
     `id` int AUTO_INCREMENT NOT NULL ,

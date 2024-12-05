@@ -49,6 +49,7 @@ $rating = $submission->getRatingInfo();
                         <p>
                             <?=  $submission->getImage()->getDesc() ?>
                         </p>
+                        <input id="image_id" type="hidden" name="sub_id" value="<?= $submission->getImageId() ?>">
                     </div>
                 </div>
 

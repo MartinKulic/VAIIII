@@ -9,6 +9,7 @@ use App\Helpers\FileStorage;
 use App\Helpers\Submission;
 use App\Models\Image;
 use App\Core\Responses\JsonResponse;
+use App\Models\Rating;
 use http\Message;
 
 /**
@@ -43,7 +44,7 @@ class SubmissionController extends AControllerBase
      */
     public function index(): Response
     {
-        // TODO: Implement index() method.
+        throw new HTTPException(501, "Not Implemented");
     }
     public function add(): Response
     {
@@ -117,6 +118,72 @@ class SubmissionController extends AControllerBase
         if (is_object($requestData) && property_exists($requestData, 'voted') && !empty($requestData->voted))
         {
             $ratingInfo = $this->currentSubmission->getRatingInfo();
+            $rating = $ratingInfo->getCurUserRate();
+
+            $voteVal = (int) $requestData->voted;
+            if($voteVal == 0){
+                throw new HTTPException(405,"Invalid vote value");
+            }
+
+            // Ratin este neexistuje
+            if (is_null($rating)) {
+                $rating = new Rating();
+                $rating->setImageId($this->currentSubmission->getImageId());
+                $rating->setUserId($this->app->getAuth()->getLoggedUserId());
+                $rating->setValue($voteVal);
+
+                $ratingInfo->setScore($ratingInfo->getScore() + $voteVal);
+
+                if($voteVal > 0){
+                    $ratingInfo->setUp($ratingInfo->getUp()+1);
+                }
+                else if($voteVal < 0){
+                    $ratingInfo->setDown($ratingInfo->getUp()+1);
+                }
+                $rating->save();
+                $ratingInfo->setCurUserRateId($rating->getId());
+            }
+
+            // Rating uz existoval
+            //Bol UP votnuty
+            else if($ratingInfo->getCurUserVote() > 0){
+                // zas upvote = zmaz
+                if ($voteVal > 0) {
+                    $rating->delete();
+                    $ratingInfo->chngeUp(-1);
+                    $ratingInfo->deleteRateMem();
+                }
+                // downvote
+                else if($voteVal < 0){
+                    $ratingInfo->chngeUp(-1);
+                    $ratingInfo->chngeDown(1);
+                    $ratingInfo->chngeScore($voteVal);
+
+                    $rating->setValue($voteVal);
+                    $rating->save();
+
+                }
+
+            }
+            //Bol DOWN votnuty
+            else if ($ratingInfo->getCurUserVote() < 0){
+                // zas downvote = zmaz
+                if ($voteVal < 0) {
+                    $rating->delete();
+                    $ratingInfo->chngeDown(-1);
+                    $ratingInfo->deleteRateMem();
+                }
+                // upvote
+                else if($voteVal > 0){
+                    $ratingInfo->chngeUp(1);
+                    $ratingInfo->chngeDown(-1);
+                    $ratingInfo->chngeScore($voteVal);
+
+                    $rating->setValue($voteVal);
+                    $rating->save();
+                }
+            }
+            $ratingInfo->setCurUserVote($voteVal);
 
             // Not implemented yet. for now just sent back what you recieve
 

@@ -9,8 +9,7 @@ $submission = @$data["submission"];
 ?>
 
 <form method="post" action="<?= $link->url('submission.save') ?>" enctype="multipart/form-data">
-
-    <input <input type="hidden" name="sub_id" value="<?= @$data['submission']?->getImageId() ?>">
+    <input type="hidden" name="sub_id" value="<?= @$data['submission']?->getImageId() ?>">
 
     <?php if($data["purpose"] == "add"): ?>
     <label for="imageInput">Image:</label>

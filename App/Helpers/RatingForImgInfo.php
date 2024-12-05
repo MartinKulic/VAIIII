@@ -3,15 +3,17 @@
 namespace App\Helpers;
 
 use App\Models\Rating;
+use JsonSerializable;
 use stdClass;
 
 // poc hodnoteni pozitivne nedativne, hodnotenie prihlaseneho uzivatela
-class RatingForImgInfo extends StdClass
+class RatingForImgInfo implements JsonSerializable
 {
     protected $up=0;
     protected $down =0;
     protected $score=0;
     protected $curUserVote=0;
+    protected $curUserRateId = null; // Rate ktory je aktivny
 
     public function __construct($imgId, $userID)
     {
@@ -21,6 +23,7 @@ class RatingForImgInfo extends StdClass
             $ratingVal = $rating->getValue();
             if ($rating->getUserId() == $userID) {
                 $this->curUserVote = $ratingVal;
+                $this->curUserRateId = $rating->getId();
             }
             if ($ratingVal>0){
                 $this->up++;
@@ -32,6 +35,41 @@ class RatingForImgInfo extends StdClass
             $this->score+=$ratingVal;
         }
 
+    }
+
+    public function chngeUp($delta){
+        $this->up += $delta;
+    }
+    public function chngeDown($delta){
+        $this->down += $delta;
+    }
+    public function chngeScore($delta, $prevUserVote=null){
+        $prevUserVote ?? $this->curUserVote;
+        $this->score += -$prevUserVote +$delta;
+    }
+
+    public function setCurUserVote(int $curUserVote): void
+    {
+        $this->curUserVote = $curUserVote;
+    }
+
+    public function setCurUserRateId(?int $curUserRateId): void
+    {
+        $this->curUserRateId = $curUserRateId;
+    }
+
+    public function deleteRateMem()
+    {
+        $this->score += -$this->curUserVote;
+        $this->curUserVote = 0;
+        $this->curUserRateId = null;
+    }
+    public function getCurUserRate(){
+        return Rating::getOne($this->curUserRateId);
+    }
+    public function getCurUserRateId(): ?int
+    {
+        return $this->curUserRateId;
     }
 
     public function getUp(): int
@@ -70,4 +108,13 @@ class RatingForImgInfo extends StdClass
     }
 
 
+    public function jsonSerialize() : mixed
+    {
+        return [
+            'up' => $this->up,
+            'down' => $this->down,
+            'score' => $this->score,
+            'curUserVote' => $this->curUserVote,
+        ];
+    }
 }
