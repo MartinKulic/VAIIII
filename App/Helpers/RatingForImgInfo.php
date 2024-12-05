@@ -44,7 +44,7 @@ class RatingForImgInfo implements JsonSerializable
         $this->down += $delta;
     }
     public function chngeScore($delta, $prevUserVote=null){
-        $prevUserVote ?? $this->curUserVote;
+        $prevUserVote = (!is_null($prevUserVote)) ?: $this->curUserVote;
         $this->score += -$prevUserVote +$delta;
     }
 

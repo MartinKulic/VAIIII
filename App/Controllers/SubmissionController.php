@@ -138,7 +138,7 @@ class SubmissionController extends AControllerBase
                     $ratingInfo->setUp($ratingInfo->getUp()+1);
                 }
                 else if($voteVal < 0){
-                    $ratingInfo->setDown($ratingInfo->getUp()+1);
+                    $ratingInfo->setDown($ratingInfo->getDown()+1);
                 }
                 $rating->save();
                 $ratingInfo->setCurUserRateId($rating->getId());
@@ -152,6 +152,7 @@ class SubmissionController extends AControllerBase
                     $rating->delete();
                     $ratingInfo->chngeUp(-1);
                     $ratingInfo->deleteRateMem();
+                    $voteVal = 0;
                 }
                 // downvote
                 else if($voteVal < 0){
@@ -172,6 +173,7 @@ class SubmissionController extends AControllerBase
                     $rating->delete();
                     $ratingInfo->chngeDown(-1);
                     $ratingInfo->deleteRateMem();
+                    $voteVal = 0;
                 }
                 // upvote
                 else if($voteVal > 0){
