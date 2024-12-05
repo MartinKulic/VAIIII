@@ -1,7 +1,9 @@
 ﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
+-- //TODO: upravy databazy
 -- rating should have imageId + userId as primary key
+-- image should have time of submission
 
 CREATE TABLE `images` (
     `id` int AUTO_INCREMENT NOT NULL ,

@@ -18,7 +18,7 @@ class HomeController extends AControllerBase
     {
         $messages = $this->request()->getValue("messages");
         return $this->html([
-            "images" => Image::getAll(),
+            "images" => Image::getAll(orderBy: '`id` desc'),
             "messages" => $messages
         ]);
     }

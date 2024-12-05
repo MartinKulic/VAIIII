@@ -80,27 +80,23 @@ class SubmissionController extends AControllerBase
     }
 
     public function edit(): Response{
-        $id = (int) $this->request()->getValue("imgID");
-        $submission = new Submission($id);
 
-        if (is_null($submission)) {
+        if (is_null($this->currentSubmission)) {
             throw new HTTPException(405,"Submission not found");
         }
         return $this->html([
-            "submission"=>$submission,
+            "submission"=>$this->currentSubmission,
             "purpose"=>"edit"
         ]);
     }
 
     public function delete(): Response{
-        $id = (int) $this->request()->getValue("imgID");
-        $submission = new Submission($id);
 
-        if (is_null($submission)) {
+        if (is_null($this->currentSubmission)) {
             throw new HTTPException(405,"Submission not found");
         }
 
-        $submission->delete();
+        $this->currentSubmission->delete();
 
         return $this->redirect($this->url("home.index", [
             "messages"=>["Submission deleted successfully"]

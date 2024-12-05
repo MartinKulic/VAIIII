@@ -36,7 +36,7 @@ $rating = $submission->getRatingInfo();
                     <?php if ($auth->isLogged() && $submission->getAutorID()==$auth->getLoggedUserId()) : ?>
                     <div class="d-flex align-items-stretch">
                         <a href="<?=$link->url("submission.edit", ["imgID"=>$submission->getImage()->getId()])?>" class="btn btn-primary d-flex align-items-center">
-                            <span class="h5"> <i class="bi bi-pencil"></i> Edit </span></a>
+                            <span class="h5 mb-1"> <i class="bi bi-pencil"></i> Edit </span></a>
                     </div>
                     <?php endif; ?>
                 </div>
