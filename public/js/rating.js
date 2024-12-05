@@ -29,18 +29,22 @@ class Rating{
             this.#downElement.classList.add("btn-outline-danger")
             this.#downElement.classList.remove("btn-danger")
         }
-        else if(rating["curUserVote"] > 0){
+        else if(rating["curUserVote"] < 0){
             this.#upElement.classList.remove("btn-success")
             this.#upElement.classList.add("btn-outline-success")
             this.#downElement.classList.remove("btn-outline-danger")
             this.#downElement.classList.add("btn-danger")
         }
+        else if (rating["curUserVote"]===0){
+            this.#upElement.classList.replace("btn-success","btn-outline-success")
+            this.#downElement.classList.replace("btn-danger","btn-outline-danger")
+        }
 
         this.#scoreVal.textContent = rating["score"]
         colour(this.#scoreVal)
 
-        #voteUpCount.textContent=rating["up"]
-        #voteDownCount.textContent=rating["down"]
+        this.#voteUpCount.textContent=rating["up"]
+        this.#voteDownCount.textContent=rating["down"]
     }
 
     async sendReques(body) {let url = "http://127.0.0.1/?c=submission&a=rate&imgID="+this.#image_id //http://localhost/?c=submission&a=rate
