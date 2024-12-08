@@ -1,4 +1,5 @@
 <?php
+$data["purpose"] = "edit"
 ?>
 
 <div class="container">

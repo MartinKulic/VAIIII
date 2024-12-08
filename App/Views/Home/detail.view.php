@@ -46,7 +46,7 @@ $rating = $submission->getRatingInfo();
                             <h5><?= $submission->getImage()->getName() ?></h5>
                             <p class="fs-6">By <?=  $submission->getAutorName() ?></p>
                         </div>
-                        <p>
+                        <p class = "text-break">
                             <?=  $submission->getImage()->getDesc() ?>
                         </p>
                         <input id="image_id" type="hidden" name="sub_id" value="<?= $submission->getImageId() ?>">

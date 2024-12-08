@@ -22,7 +22,12 @@ class SubmissionController extends AControllerBase
     public function authorize(string $action)
     {
         $imgID = (int) $this->request()->getValue("imgID");
-        $this->currentSubmission = new Submission($imgID, $this->app->getAuth()->getLoggedUserId());
+        if($imgID > 0) {
+            $this->currentSubmission = new Submission($imgID, $this->app->getAuth()->getLoggedUserId());
+        }
+//        else{
+//            $this->currentSubmission = null;
+//        }
 
         if ($this->app->getAuth()->isLogged()){
             switch ($action) {
@@ -48,25 +53,33 @@ class SubmissionController extends AControllerBase
     }
     public function add(): Response
     {
-        return $this->html([
-            "purpose"=>"add"
-        ]);
+        return $this->html();
     }
     public function save(): Response
     {
-        $id = $this->request()->getValue("sub_id");
         $notSaved = true;
 
-
-        if ($id > 0) {
-            $image = Image::getOne($id);
-            $notSaved = false;
-        } else {
+        if (is_null($this->currentSubmission)) {
             $image = new Image();
+            $image->setId(0);
+            $image->setPath($this->request()->getFiles()["image"]['tmp_name']);
+            $this->currentSubmission = new Submission(NULL,NULL);
+            $this->currentSubmission->setImage($image);
+        } else {
+            $image = $this->currentSubmission->getImage();
+            $notSaved = false;
         }
         $image->setName($this->request()->getValue("name"));
         $image->setDesc($this->request()->getValue("desc"));
         $image->setAutorId($this->app->getAuth()->getLoggedUserId());
+
+        $validation = $this->validate($image, $this->request()->getFiles()["image"]);
+        if(!is_null($validation)) {
+            return $this->html([
+                    "submission"=>$this->currentSubmission,
+                    "error"=>$validation
+                ], $notSaved ? "add" : "edit");
+        }
 
         if($notSaved) {
             $newName = FileStorage::saveFile($this->request()->getFiles()["image"]);
@@ -86,7 +99,7 @@ class SubmissionController extends AControllerBase
         }
         return $this->html([
             "submission"=>$this->currentSubmission,
-            "purpose"=>"edit"
+
         ]);
     }
 
@@ -120,6 +133,7 @@ class SubmissionController extends AControllerBase
             if($voteVal == 0){
                 throw new HTTPException(405,"Invalid vote value");
             }
+            // TODO: Refaktor if Hell
 
             // Ratin este neexistuje
             if (is_null($rating)) {
@@ -190,5 +204,32 @@ class SubmissionController extends AControllerBase
         else{
             throw new HTTPException(405,"Invalid request body");
         }
+    }
+
+    private function validate($image, $ingFile) {
+        if($image->getName() == ""){
+            return "Title is required";
+        }
+        if (strlen($image->getName()) > 100) {
+            return "Max lenght of Title is 100 characters";
+        }
+        if (strlen($image->getDesc()) > 1000) {
+            return "Max length of Description is 1000 characters";
+        }
+        if ($image->getId() == 0) {
+            $type = $ingFile['type'];
+            $allowedTypes = array('image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/tiff', 'image/vnd.microsoft.icon', "image/img");
+
+            if (!in_array($type, $allowedTypes)) {
+                return "Not supported image type. Supported types are jpeg, png, gif, bmp, tiff, icon, img";
+            }
+
+            $size = $ingFile['size'];
+            if ($size > 3 * 1024 * 1024) {
+                return "Image size is too large. Max allowed size is 3 MB";
+            }
+        }
+
+        return null;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+$data["purpose"] = "add"
 ?>
 
 <div class="container">

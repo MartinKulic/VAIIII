@@ -16,6 +16,11 @@ class Submission
     protected $fullRating; // poc hodnoteni pozitivne nedativne, hodnotenie prihlaseneho uzivatela
 
     function __construct($image_id, $user_id){
+        if(is_null($image_id) && is_null($user_id)){
+
+            return $this;
+        }
+
         $this->image = Image::getOne($image_id);
         if (is_null($this->image) ){
             return null;
@@ -24,7 +29,7 @@ class Submission
         $this->autorName = $autor?->getName() ?? "unknown";
         $this->autorId = $autor?->getId() ?? 0;
 
-        $this->imageId=$this->image->getId();
+        $this->imageId=$this->image?->getId() ?? 0;
 
         $this->fullRating = new RatingForImgInfo($this->image->getId(), $user_id);
         return $this;
@@ -55,7 +60,7 @@ class Submission
         $this->image->delete();
     }
     public function getImageId(){
-        return $this->image->getId();
+        return $this?->image?->getId() ?? 0;
     }
 
     public function getAutorId(): int
