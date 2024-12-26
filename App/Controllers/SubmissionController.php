@@ -10,6 +10,7 @@ use App\Helpers\Submission;
 use App\Models\Image;
 use App\Core\Responses\JsonResponse;
 use App\Models\Rating;
+use finfo;
 use http\Message;
 
 /**
@@ -217,11 +218,24 @@ class SubmissionController extends AControllerBase
             return "Max length of Description is 1000 characters";
         }
         if ($image->getId() == 0) {
-            $type = $ingFile['type'];
-            $allowedTypes = array('image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/tiff', 'image/vnd.microsoft.icon', "image/img");
 
-            if (!in_array($type, $allowedTypes)) {
-                return "Not supported image type. Supported types are jpeg, png, gif, bmp, tiff, icon, img";
+            if (!isset($ingFile['tmp_name']) || $ingFile['tmp_name'] === "" || !is_uploaded_file($ingFile['tmp_name'])) {
+                return "File upload failed. Please try again.";
+            }
+
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            $type = $finfo->file($ingFile['tmp_name']);
+            $allowedTypes = array(
+                'image/jpeg',
+                'image/png',
+                'image/gif',
+                'image/bmp',
+                'image/tiff',
+                'image/vnd.microsoft.icon',
+            );
+
+            if ($ingFile["name"] != "" && !in_array($type, $allowedTypes)) {
+                return "Not supported image type. Supported types are jpeg, png, gif, bmp, tiff, icon.";
             }
 
             $size = $ingFile['size'];

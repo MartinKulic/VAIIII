@@ -4,6 +4,7 @@ services:
     image: ghcr.io/thevajko/vaii-web-server:main
     volumes:
       - ./../:/var/www/html/
+      - ./custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini
     ports:
       - "127.0.0.1:80:80"
     stdin_open: true

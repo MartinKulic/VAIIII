@@ -11,8 +11,14 @@ use App\Models\Image;
 $submission = $data["submission"];
 $rating = $submission->getRatingInfo();
 ?>
+<!-- Attempt to show image on full screen -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+    <h1>Nieco</h1>
+</div>
 <div class = container-fluid>
     <div class="row">
+
         <!-- Side pannel -->
         <?php require "sidePanel.view.php"?>
 
@@ -21,7 +27,9 @@ $rating = $submission->getRatingInfo();
             <div class="mainImage flex-fill">
 
                 <div class="align-items-center flex-fill mt-2">
+                    <div type="button" data-toggle="modal" data-target="#exampleModal">
                     <img class="col-12" alt="Hlavny obrazok" src="<?= $submission->getImage()->getPath() ?>">
+                    </div>
                 </div>
                 <div class="flex-row mt-3 d-flex justify-content-between">
                     <div class="col">
@@ -68,3 +76,4 @@ $rating = $submission->getRatingInfo();
     colour(scoreVal)
     let rat = new Rating()
 </script>
+

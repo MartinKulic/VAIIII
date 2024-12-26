@@ -49,23 +49,25 @@ class Rating{
 
     async sendReques(body) {let url = "http://127.0.0.1/?c=submission&a=rate&imgID="+this.#image_id //http://localhost/?c=submission&a=rate
         try {
-            // Bild up fetch and wait for response
+
             let response = await fetch(
-                url, // URL to the action
+                url,
                 {
                     method: "POST",
                     body: JSON.stringify(body),
-                    headers: { // Set headers for JSON communication
-                        "Content-type": "application/json", // Send JSON
-                        "Accept": "application/json", // Accept only JSON as response
+                    headers: {
+                        "Content-type": "application/json",
+                        "Accept": "application/json",
                     }
-                });
-            // If return code do not match our expected value throw error
-            if (response.status !== 200) throw new Error("Wrong Response");
+                })
+
+            if (response.status !== 200){
+                throw new Error("Wrong Response")
+            }
 
             return response.json()
         } catch (ex) {
-            // On any error just return error
+
             return ex;
         }
     }
